@@ -29,14 +29,14 @@ int double_hash (int key, int M) {
     return 0;
 }
 
-int mult_hash(int key, int A) {
+int mult_hash(int key, double A) {
 
     return 0;
 }
 private: 
 int key_ = 0;
 int M = 0;
-int A = 0;
+double A = 0.0;
 
 };
 
