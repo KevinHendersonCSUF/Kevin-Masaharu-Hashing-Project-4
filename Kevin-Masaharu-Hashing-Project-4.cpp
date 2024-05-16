@@ -40,6 +40,7 @@ int A = 0;
 
 };
 
-void main(){
+int main(){
 
-};
+return 0;
+}
