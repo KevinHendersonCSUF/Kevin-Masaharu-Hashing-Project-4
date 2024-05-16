@@ -4,7 +4,7 @@
 // https://github.com/KevinHendersonCSUF/Kevin-Masaharu-Hashing-Project-4.git
 
 // Name: Masaharu Saito
-// CWID:
+// CWID:885148429
 // Git repository Link:
 // https://github.com/KevinHendersonCSUF/Kevin-Masaharu-Hashing-Project-4.git
 #include <algorithm>
