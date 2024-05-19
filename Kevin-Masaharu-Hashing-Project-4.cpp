@@ -24,7 +24,7 @@ void div_hash(int key, int M) {
     M_ = M;
     int index = key % M;
     if(table.count(index) != 0) {
-        std::cout << "Collision occured at " << index << ", using quadratic probing to find new index!" << std::endl;
+        std::cout << "Collision occurred at " << index << ", using quadratic probing to find new index!" << std::endl;
         for(int i = 1; i <= M; i++) {
             std::cout << "i = " << i << std::endl;
             int new_index = (index + (i * i)) % M;
@@ -41,10 +41,33 @@ void div_hash(int key, int M) {
     }
 }
 
-int mid_sqr_hash(int key, int  M) {
-
+int mid_sqr_hash(int key, int M) {
+    std::unordered_map<int, int>
+        table{}; // DELETE IF MAIN FUNCTION ONLY USES ONE HASHMAP
+    key_ = key;
+    M_ = M;
+    int squared_key = key * key;
+    int index = ((squared_key / 10) % 100) % M; 
+    if (table.count(index) != 0) {
+      std::cout << "Collision occurred at " << index
+                << ", using quadratic probing to find new index!" << std::endl;
+      for (int i = 1; i <= M; i++) {
+        std::cout << "i = " << i << std::endl;
+        int new_index = (index + (i * i)) % M;
+        if (table.count(new_index) == 0) {
+          table.insert({new_index, key});
+          std::cout << "After quadratic probing, " << key
+                    << " is now stored at " << new_index << std::endl;
+          break;
+        }
+      }
+    } // QUADRATIC PROBING FOR COLLISIONS
+    else {
+      table.insert({index, key});
+      std::cout << "inserted " << key << " at " << index << std::endl;
+    }
     return 0;
-}
+   }
 
 int double_hash (int key, int M) {
 
