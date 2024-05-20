@@ -49,7 +49,7 @@ int mid_sqr_hash(int key, int  M) {
     key_ = key;
     M_ = M;
     int squared_key = key * key;
-    int index = (squared_key / M) % M; 
+    int index = (squared_key / 10) % 100; 
     if (table.count(index) != 0) {
       std::cout << "Collision occurred at " << index
                 << ", using quadratic probing to find new index!" << std::endl;
@@ -66,7 +66,7 @@ int mid_sqr_hash(int key, int  M) {
     } // QUADRATIC PROBING FOR COLLISIONS
     else {
       table.insert({index, key});
-      std::cout << "inserted " << key << " at " << index << std::endl;
+      std::cout << "Using r = 2, " << key << " inserted at " << index << std::endl;
     }
     return 0;
    }
@@ -91,8 +91,8 @@ std::unordered_map<int, int> table_{};
 int main(){
 Hash hash_map;
 hash_map.div_hash(1234, 25);
-hash_map.div_hash(59, 10);
-hash_map.div_hash(69, 10);
+hash_map.div_hash(59, 10); // collision case
+hash_map.div_hash(69, 10); // double collision case
 // try{
 // hash_map.div_hash("String", 40);
 // }
@@ -100,5 +100,6 @@ hash_map.div_hash(69, 10);
 //      std::cerr << msg << std::endl;
 //    }
 hash_map.mid_sqr_hash(60, 100);
+hash_map.mid_sqr_hash(75, 100);
 return 0;
 }
