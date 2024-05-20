@@ -40,6 +40,9 @@ void div_hash(int key, int M) {
     table.insert({index, key});
     std::cout << "inserted " << key << " at " << index << std::endl;
     }
+    // if () {
+    //   throw "Invalid key, key must be an integer!";
+    // }
 }
 
 int mid_sqr_hash(int key, int  M) {
@@ -90,6 +93,12 @@ Hash hash_map;
 hash_map.div_hash(1234, 25);
 hash_map.div_hash(59, 10);
 hash_map.div_hash(69, 10);
+// try{
+// hash_map.div_hash("String", 40);
+// }
+// catch (const char* msg) {
+//      std::cerr << msg << std::endl;
+//    }
 hash_map.mid_sqr_hash(60, 100);
 return 0;
 }
