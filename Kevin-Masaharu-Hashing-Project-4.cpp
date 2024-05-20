@@ -25,7 +25,7 @@ void div_hash(int key, int M) {
     M_ = M;
     int index = key % M;
     if(table.count(index) != 0) {
-        std::cout << "Collision occured at " << index << ", using quadratic probing to find new index!" << std::endl;
+        std::cout << "Collision occurred at " << index << ", using quadratic probing to find new index!" << std::endl;
         for(int i = 1; i <= M; i++) {
             std::cout << "i = " << i << std::endl;
             int new_index = (index + (i * i)) % M;
@@ -66,7 +66,7 @@ int mid_sqr_hash(int key, int  M) {
       std::cout << "inserted " << key << " at " << index << std::endl;
     }
     return 0;
-}
+   }
 
 int double_hash (int key, int M) {
 
