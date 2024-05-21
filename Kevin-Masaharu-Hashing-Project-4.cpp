@@ -11,7 +11,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#include <iomanip>
+#include <cmath>
 
 class Hash {
 public:
@@ -76,9 +76,31 @@ int double_hash (int key, int M) {
     return 0;
 }
 
-int mult_hash(int key, double A) {
-
-    return 0;
+void mult_hash(int key, int A, int M) {
+  if(A < 0 || A > 1) {
+    std::cout << "A must be between 0 and 1!" << std::endl;
+    return;
+  }
+    key_ = key;
+    M_ = M;
+    A_ = A;
+    int index = floor((M*(key*A) % 1));
+        if(table.count(index) != 0) {
+        std::cout << "Collision occurred at " << index << ", using quadratic probing to find new index!" << std::endl;
+        for(int i = 1; i <= M; i++) {
+            std::cout << "i = " << i << std::endl;
+            int new_index = (index + (i * i)) % M;
+            if(table.count(new_index) == 0) {
+                table.insert({new_index, key});
+                std::cout << "After quadratic probing, " << key << " is now stored at " << new_index << std::endl;
+                break;
+            }
+        }
+    }// QUADRATIC PROBING FOR COLLISIONS
+    else {
+    table.insert({index, key});
+    std::cout << "inserted " << key << " at " << index << std::endl;
+    }
 }
 
 private: 
@@ -101,5 +123,6 @@ hash_map.div_hash(69, 10); // double collision case
 //    }
 hash_map.mid_sqr_hash(60, 100);
 hash_map.mid_sqr_hash(75, 100);
+hash_map.mult_hash(12345, 0.357840, 100);
 return 0;
 }
