@@ -148,6 +148,7 @@ hash_map.mid_sqr_hash(60, 100);//normal
 hash_map.mid_sqr_hash(7, 100);//smaller k value
 hash_map.mid_sqr_hash(90, 1000);//big m value
 hash_map.mid_sqr_hash(250, 100);//big k value; small m value
+hash_map.mid_sqr_hash(348, 10);//big k value; small m value
 hash_map.mult_hash(12345, 0.357840, 100); // Normal insertion case
 hash_map.mult_hash(14683, 3, 20); // A is greater than 1
 hash_map.mult_hash(14683, -1 , 20); // A is less than 0
