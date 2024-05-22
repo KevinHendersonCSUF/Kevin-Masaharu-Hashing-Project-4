@@ -58,7 +58,7 @@ int mid_sqr_hash(int key, int M) {
     int squared_key = key * key;
     //std::cout << "Squared Key = " << squared_key << std::endl;
     int amount_extracted = std::to_string(M - 1).length();
-    //std::string squared_key_string = std::to_string(squared_key);
+    std::string squared_key_string = std::to_string(squared_key);
     //std::cout << "Squared key length = " << squared_key_string.length()
               //<< std::endl;
     while (squared_key_string.length() > amount_extracted) {
