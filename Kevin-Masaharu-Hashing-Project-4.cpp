@@ -103,7 +103,7 @@ int double_hash (int key, int M) {
 
 void mult_hash(double key, double A, int M) {
   if(A < 0 || A > 1) {
-    std::cout << "A must be between 0 and 1!" << std::endl;
+    std::cout << "'A' must be between 0 and 1!" << std::endl;
     return;
   }
     key_ = key;
@@ -149,5 +149,9 @@ hash_map.mid_sqr_hash(7, 100);//smaller k value
 hash_map.mid_sqr_hash(90, 1000);//big m value
 hash_map.mid_sqr_hash(250, 100);//big k value; small m value
 hash_map.mult_hash(12345, 0.357840, 100);
+hash_map.mult_hash(14683, 3, 20); // A is greater than 1
+hash_map.mult_hash(14683, -1 , 20); // A is less than 0
+hash_map.mult_hash(60, 0.57, 25);
+hash_map.mult_hash(45, 0.57, 25);
 return 0;
 }
