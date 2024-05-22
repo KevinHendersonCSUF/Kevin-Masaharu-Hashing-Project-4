@@ -45,34 +45,30 @@ void div_hash(int key, int M) {
     // }
 }
 
-int mid_sqr_hash(int key, int  M) {
+int mid_sqr_hash(int key, int M) {
     key_ = key;
     M_ = M;
+    int index = 0;
     int squared_key = key * key;
-    //std::cout << "Squared Key" << squared_key << std::endl;
+    //std::cout << "Squared Key = " << squared_key << std::endl;
     int amount_extracted = std::to_string(M - 1).length();
     //std::cout << "Amount extracted = " << amount_extracted << std::endl;
     std::string squared_key_string = std::to_string(squared_key);
     //std::cout << "Squared key length = " << squared_key_string.length() << std::endl;
     while (squared_key_string.length() > amount_extracted) {
-      //remove first and last digit in squared key
-        squared_key_string = squared_key_string.substr(1);
-       // std::cout << "Result string = " << squared_key_string << std::endl;
-        //std::cout << "Result length = " << squared_key_string.length() << std::endl;
-       // std::cout << "Squared key int = " << squared_key_string << std::endl;
-        if (squared_key_string.length() == amount_extracted) {
-          break;
-        } else {
-          squared_key_string = squared_key_string.substr(0, squared_key_string.size() - 1);
-          std::cout << "Result string2 = " << squared_key_string << std::endl;
-            squared_key_string = std::stoi(squared_key_string);
-          if (squared_key_string.length() == amount_extracted) {
-            break;
-          }
+      squared_key_string = squared_key_string.substr(1);//removes first number
+      index = std::stoi(squared_key_string);
+     // std::cout << "Result string = " << squared_key_string << std::endl;
+     // std::cout << "squared_key_string length = " << squared_key_string.length() << std::endl;
+      if (squared_key_string.length() != amount_extracted) {
+        squared_key_string = squared_key_string.substr(0, squared_key_string.size() - 1);
+       // std::cout << "Result string2 = " << squared_key_string << std::endl;
+
+        index = std::stoi(squared_key_string);
         }
-    }
-    //std::cout << "\n\n" << squared_key_string << std::endl;
-    int index = (squared_key / 10) % 100; 
+      }
+    //std::cout << "\n\n" << index << std::endl;
+  
     if (table.count(index) != 0) {
       std::cout << "Collision occurred at " << index
                 << ", using quadratic probing to find new index!" << std::endl;
@@ -86,13 +82,15 @@ int mid_sqr_hash(int key, int  M) {
           break;
         }
       }
-    } // QUADRATIC PROBING FOR COLLISIONS
-    else {
+      
+    } else { // QUADRATIC PROBING FOR COLLISIONS
       table.insert({index, key});
-      std::cout << "Using r = 2, " << key << " inserted at " << index << std::endl;
+      std::cout << "Using r = 2, " << key << " inserted at " << index
+                << std::endl;
     }
     return 0;
-   }
+  }
+
 int double_hash (int key, int M) {
 
     return 0;
