@@ -8,91 +8,87 @@
 // Git repository Link:
 // https://github.com/KevinHendersonCSUF/Kevin-Masaharu-Hashing-Project-4.git
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#include <cmath>
 
 class Hash {
 public:
-Hash() {
-    table_ = table;
-} //UNCOMMENT IF MAIN FUNCTION ONLY USES ONE HASHMAP
-std::unordered_map<int, int> table{};
-void div_hash(std::string invalid, int M) {
-  std::cout << "invalid input, key must be an integer!" << std::endl;
-}
-void div_hash() {
-  std::cout << "invalid input, please give a key and table size!" << std::endl;
-}
-void div_hash(int key, int M) {
-    // std::unordered_map<int, int> table{}; // DELETE IF MAIN FUNCTION ONLY USES ONE HASHMAP
+  Hash() { table_ = table; }
+  std::unordered_map<int, int> table{};
+  void div_hash(std::string invalid, int M) {
+    std::cout << "invalid input, key must be an integer!" << std::endl
+              << std::endl;
+  } // Function overload for invalid input
+  void div_hash() {
+    std::cout << "invalid input, please give a key and table size!" << std::endl
+              << std::endl;
+  } // function overload for null function argument
+  void div_hash(int key, int M) {
     key_ = key;
     M_ = M;
     int index = key % M;
-    if(table.count(index) != 0) {
-        std::cout << "Collision occurred at " << index << ", using quadratic probing to find new index!" << std::endl;
-        for(int i = 1; i <= M; i++) {
-            std::cout << "i = " << i << std::endl;
-            int new_index = (index + (i * i)) % M;
-            if(table.count(new_index) == 0) {
-                table.insert({new_index, key});
-                std::cout << "After quadratic probing, " << key << " is now stored at " << new_index << std::endl;
-                break;
-            }
-        }
-    }// QUADRATIC PROBING FOR COLLISIONS
-    else {
-    table.insert({index, key});
-    std::cout << "inserted " << key << " at " << index << std::endl;
-    }
-    // if () {
-    //   throw "Invalid key, key must be an integer!";
-    // }
-}
-
-int mid_sqr_hash(int key, int M) {
-    key_ = key;
-    M_ = M;
-    int index = 0;
-    int squared_key = key * key;
-    //std::cout << "Squared Key = " << squared_key << std::endl;
-    int amount_extracted = std::to_string(M - 1).length();
-    std::string squared_key_string = std::to_string(squared_key);
-    //std::cout << "Squared key length = " << squared_key_string.length()
-              //<< std::endl;
-    while (squared_key_string.length() > amount_extracted) {
-      squared_key_string = squared_key_string.substr(1);//removes first number
-      index = std::stoi(squared_key_string);
-      //std::cout << "Result string = " << squared_key_string << std::endl;
-     // std::cout << "squared_key_string length = " << squared_key_string.length() << std::endl;
-      if (squared_key_string.length() != amount_extracted) {
-        squared_key_string = squared_key_string.substr(0, squared_key_string.size() - 1);
-        //std::cout << "Result string2 = " << squared_key_string << std::endl;
-
-        index = std::stoi(squared_key_string);
-        }
-      }
-    index = std::stoi(squared_key_string);
-  
     if (table.count(index) != 0) {
-      std::cout << "Collision occurred at " << index
-                << ", using quadratic probing to find new index!" << std::endl;
+      std::cout << "Failed to insert " << key << ". Collision occurred at "
+                << index << ", using quadratic probing to find new index!"
+                << std::endl;
       for (int i = 1; i <= M; i++) {
         std::cout << "i = " << i << std::endl;
         int new_index = (index + (i * i)) % M;
         if (table.count(new_index) == 0) {
           table.insert({new_index, key});
           std::cout << "After quadratic probing, " << key
-                    << " is now stored at " << new_index << std::endl;
+                    << " is now stored at " << new_index << std::endl
+                    << std::endl;
           break;
         }
       }
-      
+    } // QUADRATIC PROBING FOR COLLISIONS
+    else {
+      table.insert({index, key});
+      std::cout << "inserted " << key << " at " << index << std::endl
+                << std::endl;
+    }
+  }
+
+  int mid_sqr_hash(int key, int M) {
+    key_ = key;
+    M_ = M;
+    int index = 0;
+    int squared_key = key * key;
+    int amount_extracted = std::to_string(M - 1).length();
+    std::string squared_key_string = std::to_string(squared_key);
+    while (squared_key_string.length() > amount_extracted) {
+      squared_key_string = squared_key_string.substr(1); // removes first number
+      index = std::stoi(squared_key_string);
+      if (squared_key_string.length() != amount_extracted) {
+        squared_key_string =
+            squared_key_string.substr(0, squared_key_string.size() - 1);
+        index = std::stoi(squared_key_string);
+      }
+    }
+    index = std::stoi(squared_key_string);
+
+    if (table.count(index) != 0) {
+      std::cout << "Failed to insert " << key << ". Collision occurred at "
+                << index << ", using quadratic probing to find new index!"
+                << std::endl;
+      for (int i = 1; i <= M; i++) {
+        std::cout << "i = " << i << std::endl;
+        int new_index = (index + (i * i)) % M;
+        if (table.count(new_index) == 0) {
+          table.insert({new_index, key});
+          std::cout << "After quadratic probing, " << key
+                    << " is now stored at " << new_index << std::endl
+                    << std::endl;
+          break;
+        }
+      }
+
     } else { // QUADRATIC PROBING FOR COLLISIONS
       table.insert({index, key});
-      std::cout << key << " inserted at " << index
-                << std::endl;
+      std::cout << key << " inserted at " << index << std::endl << std::endl;
     }
     return 0;
   }
@@ -105,11 +101,9 @@ int mid_sqr_hash(int key, int M) {
     // palindrome index
     for (int i = 0; i < 6; i++) {
       index = (h1 + (i * h2));
-      // std::cout << "Index is " << index << std::endl;
       int reverse_index = 0;
       int palindrome_check = index;
       int num = 0;
-      // std::cout << "Palindrome check = " << palindrome_check << std::endl;
       while (palindrome_check > 0) {
         num = palindrome_check % 10;
         reverse_index = reverse_index * 10 + num;
@@ -127,44 +121,50 @@ int mid_sqr_hash(int key, int M) {
         break;
       }
     }
-    std::cout << "inserted " << key << " at " << index << std::endl;
+    std::cout << "inserted " << key << " at " << index << std::endl
+              << std::endl;
     return 0;
   }
 
-void mult_hash(double key, double A, int M) {
-  if(A < 0 || A > 1) {
-    std::cout << "'A' must be between 0 and 1!" << std::endl;
-    return;
-  }
+  void mult_hash(double key, double A, int M) {
+    if (A < 0 || A > 1) {
+      std::cout << "'A' must be between 0 and 1!" << std::endl << std::endl;
+      return;
+    }
     key_ = key;
     M_ = M;
     A_ = A;
     double key_calc = key * A;
     double fraction = std::fmod(key_calc, 1);
-    int index = std::floor((M*fraction));
-        if(table.count(index) != 0) {
-        std::cout << "Collision occurred at " << index << ", using quadratic probing to find new index!" << std::endl;
-        for(int i = 1; i <= M; i++) {
-            std::cout << "i = " << i << std::endl;
-            int new_index = (index + (i * i)) % M;
-            if(table.count(new_index) == 0) {
-                table.insert({new_index, key});
-                std::cout << "After quadratic probing, " << key << " is now stored at " << new_index << std::endl;
-                break;
-            }
+    int index = std::floor((M * fraction));
+    if (table.count(index) != 0) {
+      std::cout << "Failed to insert " << key << ". Collision occurred at "
+                << index << ", using quadratic probing to find new index!"
+                << std::endl;
+      for (int i = 1; i <= M; i++) {
+        std::cout << "i = " << i << std::endl;
+        int new_index = (index + (i * i)) % M;
+        if (table.count(new_index) == 0) {
+          table.insert({new_index, key});
+          std::cout << "After quadratic probing, " << key
+                    << " is now stored at " << new_index << std::endl
+                    << std::endl;
+          break;
         }
-    }// QUADRATIC PROBING FOR COLLISIONS
+      }
+    } // QUADRATIC PROBING FOR COLLISIONS
     else {
-    table.insert({index, key});
-    std::cout << "inserted " << key << " at " << index << std::endl;
+      table.insert({index, key});
+      std::cout << "inserted " << key << " at " << index << std::endl
+                << std::endl;
     }
-}
+  }
 
-private: 
-int key_ = 0;
-int M_ = 0;
-double A_ = 0.0;
-std::unordered_map<int, int> table_{};
+private:
+  int key_ = 0;
+  int M_ = 0;
+  double A_ = 0.0;
+  std::unordered_map<int, int> table_{};
 };
 
 int main(){
@@ -185,6 +185,9 @@ hash_map.mult_hash(14683, 3, 20); // A is greater than 1
 hash_map.mult_hash(14683, -1 , 20); // A is less than 0
 hash_map.mult_hash(60, 0.57, 25); // Normal insertion case
 hash_map.mult_hash(45, 0.57, 25); // Normal insertion case
-hash_map.double_hash(12345, 1000);
+hash_map.double_hash(12345, 1000); // Normal insertion
+hash_map.double_hash(123, 100); // Normal Insertion
+hash_map.double_hash(12, 125); // K < M
+hash_map.double_hash(45620, 125); // i>5 case
 return 0;
 }
