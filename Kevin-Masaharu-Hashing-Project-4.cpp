@@ -58,22 +58,22 @@ int mid_sqr_hash(int key, int M) {
     int squared_key = key * key;
     //std::cout << "Squared Key = " << squared_key << std::endl;
     int amount_extracted = std::to_string(M - 1).length();
-    //std::cout << "Amount extracted = " << amount_extracted << std::endl;
-    std::string squared_key_string = std::to_string(squared_key);
-    //std::cout << "Squared key length = " << squared_key_string.length() << std::endl;
+    //std::string squared_key_string = std::to_string(squared_key);
+    //std::cout << "Squared key length = " << squared_key_string.length()
+              //<< std::endl;
     while (squared_key_string.length() > amount_extracted) {
       squared_key_string = squared_key_string.substr(1);//removes first number
       index = std::stoi(squared_key_string);
-     // std::cout << "Result string = " << squared_key_string << std::endl;
+      //std::cout << "Result string = " << squared_key_string << std::endl;
      // std::cout << "squared_key_string length = " << squared_key_string.length() << std::endl;
       if (squared_key_string.length() != amount_extracted) {
         squared_key_string = squared_key_string.substr(0, squared_key_string.size() - 1);
-       // std::cout << "Result string2 = " << squared_key_string << std::endl;
+        //std::cout << "Result string2 = " << squared_key_string << std::endl;
 
         index = std::stoi(squared_key_string);
         }
       }
-    //std::cout << "\n\n" << index << std::endl;
+    index = std::stoi(squared_key_string);
   
     if (table.count(index) != 0) {
       std::cout << "Collision occurred at " << index
@@ -96,7 +96,6 @@ int mid_sqr_hash(int key, int M) {
     }
     return 0;
   }
-
 int double_hash (int key, int M) {
 
     return 0;
