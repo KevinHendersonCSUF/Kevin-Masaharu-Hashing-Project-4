@@ -141,8 +141,10 @@ hash_map.div_hash(69, 10); // double collision case
 // catch (const char* msg) {
 //      std::cerr << msg << std::endl;
 //    }
-hash_map.mid_sqr_hash(60, 100);
-hash_map.mid_sqr_hash(75, 100);
+hash_map.mid_sqr_hash(60, 100);//normal
+hash_map.mid_sqr_hash(7, 100);//smaller k value
+hash_map.mid_sqr_hash(90, 1000);//big m value
+hash_map.mid_sqr_hash(250, 100);//big k value; small m value
 hash_map.mult_hash(12345, 0.357840, 100);
 return 0;
 }
