@@ -96,10 +96,40 @@ int mid_sqr_hash(int key, int M) {
     }
     return 0;
   }
-int double_hash (int key, int M) {
+  int double_hash(int key, int M) {
+    key_ = key;
+    M_ = M;
+    int index = 0;
+    int h1 = key % M;
+    int h2 = 1 + (key % 13);
+    // palindrome index
+    for (int i = 0; i < 6; i++) {
+      index = (h1 + (i * h2));
+      // std::cout << "Index is " << index << std::endl;
+      int reverse_index = 0;
+      int palindrome_check = index;
+      int num = 0;
+      // std::cout << "Palindrome check = " << palindrome_check << std::endl;
+      while (palindrome_check > 0) {
+        num = palindrome_check % 10;
+        reverse_index = reverse_index * 10 + num;
+        palindrome_check = palindrome_check / 10;
+      }
+      if (index == reverse_index) {
+        std::cout << index << " is a palindrome" << std::endl;
+        break;
+      } else {
+        std::cout << index << " is not a palindrome" << std::endl;
+      }
 
+      if (i > 5) {
+        index = reverse_index;
+        break;
+      }
+    }
+    std::cout << "inserted " << key << " at " << index << std::endl;
     return 0;
-}
+  }
 
 void mult_hash(double key, double A, int M) {
   if(A < 0 || A > 1) {
@@ -145,14 +175,16 @@ hash_map.div_hash(69, 10); // double collision case
 hash_map.div_hash(); // null case
 hash_map.div_hash("This shouldnt work", 25); //wrong argument case
 hash_map.mid_sqr_hash(60, 100);//normal
-hash_map.mid_sqr_hash(7, 100);//smaller k value
-hash_map.mid_sqr_hash(90, 1000);//big m value
-hash_map.mid_sqr_hash(250, 100);//big k value; small m value
+hash_map.mid_sqr_hash(60, 100);//collision case
+hash_map.mid_sqr_hash(7, 100);//smaller k value case
+hash_map.mid_sqr_hash(90, 1000);//big m value case
+hash_map.mid_sqr_hash(250, 100);//big k value & small m value case
 hash_map.mid_sqr_hash(348, 10);//big k value; small m value
 hash_map.mult_hash(12345, 0.357840, 100); // Normal insertion case
 hash_map.mult_hash(14683, 3, 20); // A is greater than 1
 hash_map.mult_hash(14683, -1 , 20); // A is less than 0
 hash_map.mult_hash(60, 0.57, 25); // Normal insertion case
 hash_map.mult_hash(45, 0.57, 25); // Normal insertion case
+hash_map.double_hash(12345, 1000);
 return 0;
 }
