@@ -60,7 +60,7 @@ public:
     int amount_extracted = std::to_string(M - 1).length();
     std::string squared_key_string = std::to_string(squared_key);
     while (squared_key_string.length() > amount_extracted) {
-      squared_key_string = squared_key_string.substr(1); // removes first number
+      squared_key_string = squared_key_string.substr(1);
       index = std::stoi(squared_key_string);
       if (squared_key_string.length() != amount_extracted) {
         squared_key_string =
