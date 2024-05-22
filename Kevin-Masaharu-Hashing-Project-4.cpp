@@ -91,7 +91,7 @@ int mid_sqr_hash(int key, int M) {
       
     } else { // QUADRATIC PROBING FOR COLLISIONS
       table.insert({index, key});
-      std::cout << "Using r = 2, " << key << " inserted at " << index
+      std::cout << key << " inserted at " << index
                 << std::endl;
     }
     return 0;
@@ -145,12 +145,6 @@ hash_map.div_hash(59, 10); // collision case
 hash_map.div_hash(69, 10); // double collision case
 hash_map.div_hash(); // null case
 hash_map.div_hash("This shouldnt work", 25); //wrong argument case
-// try{
-// hash_map.div_hash("String", 40);
-// }
-// catch (const char* msg) {
-//      std::cerr << msg << std::endl;
-//    }
 hash_map.mid_sqr_hash(60, 100);//normal
 hash_map.mid_sqr_hash(7, 100);//smaller k value
 hash_map.mid_sqr_hash(90, 1000);//big m value
